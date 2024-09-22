@@ -32,10 +32,8 @@ public class PointService {
     public UserPoint chargePoint(Long id, long amount) {
 
         UserPoint userPoint = getPoint(id);
-        long now = System.currentTimeMillis();
-        long oneDayInMillis = 24 * 60 * 60 * 1000;
 
-        pointHistoryTable.insert(id, amount, TransactionType.CHARGE, now - oneDayInMillis);
+        pointHistoryTable.insert(id, amount, TransactionType.CHARGE, System.currentTimeMillis());
 
         return userPointTable.insertOrUpdate(userPoint.id(), userPoint.point() + amount);
     }
@@ -43,10 +41,8 @@ public class PointService {
     public UserPoint usePoint(Long id, long amount) {
 
         UserPoint userPoint = getPoint(id);
-        long now = System.currentTimeMillis();
-        long oneDayInMillis = 24 * 60 * 60 * 1000;
 
-        pointHistoryTable.insert(id, amount, TransactionType.USE, now - oneDayInMillis);
+        pointHistoryTable.insert(id, amount, TransactionType.USE, System.currentTimeMillis());
 
         return userPointTable.insertOrUpdate(userPoint.id(), userPoint.point() - amount);
     }
