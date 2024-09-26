@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -20,17 +18,17 @@ public class UserPointRepositoryTest {
     private static final long DEFAULT_USER_ID = 1L;
     private static final long POINT = 500L;
 
-    @DisplayName("UserPoint 생성 후 조회")
+    @DisplayName("UserPoint 생성 후 조회 시 같은 point값을 반환해야한다.")
     @Test
     void createUserPoint() {
         // given
-        Optional<UserPoint> userPoint = repository.create(DEFAULT_USER_ID, POINT);
+        UserPoint userPoint = repository.create(DEFAULT_USER_ID, POINT);
 
         // when
-        Optional<UserPoint> result = repository.selectById(DEFAULT_USER_ID);
+        UserPoint result = repository.selectById(DEFAULT_USER_ID);
 
         // then
-        assertThat(result).isNotEmpty();
+        assertThat(result).isNotNull();
         assertThat(result).isEqualTo(userPoint);
     }
 }

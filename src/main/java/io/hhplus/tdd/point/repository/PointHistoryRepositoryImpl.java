@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -18,12 +17,12 @@ public class PointHistoryRepositoryImpl implements PointHistoryRepository {
     private final PointHistoryTable pointHistoryTable;
 
     @Override
-    public Optional<PointHistory> create(long userId, long amount, TransactionType type, long updateMillis) {
+    public PointHistory create(long userId, long amount, TransactionType type, long updateMillis) {
         log.info("Creating PointHistory for userId: {}, amount: {}, type: {}, timestamp: {}", userId, amount, type, updateMillis);
 
-        Optional<PointHistory> result = Optional.ofNullable(pointHistoryTable.insert(userId, amount, type, updateMillis));
+        PointHistory result = pointHistoryTable.insert(userId, amount, type, updateMillis);
+        log.info("PointHistory created successfully with ID: {}", result.id());
 
-        result.ifPresent(pointHistory -> log.info("PointHistory created successfully with ID: {}", pointHistory.id()));
         return result;
     }
 
