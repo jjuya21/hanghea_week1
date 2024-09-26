@@ -108,6 +108,8 @@
    -공정성이란?
       공정한 lock을 사용할 경우 | 경쟁 발생 -> 가장 오랫동안 기다린 쓰레드에게 lock을 제공
    -`Synchronized`와 달리 `ReentratLock`은 공정성 설정이 가능
+4. **ConcurrentHashMap**:
+   -`ReentrantLock`과 `ConcurrentHashMap`을 함께 사용하면 스레드 안전성을 유지하면서도 성능을 최적화할 수 있는 유연한 동시성 관리가 가능 / 각 도구의 장점을 활용하여 복잡한 동시성 요구 사항을 효과적으로 처리 가능
 
 ## 9. 결론
 
