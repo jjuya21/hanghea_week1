@@ -65,7 +65,7 @@ public class PointServiceImpl implements PointService {
 
         validatePositiveAmount(amount);
 
-        ReentrantLock lock = lockMap.computeIfAbsent(id, k -> new ReentrantLock());
+        ReentrantLock lock = lockMap.computeIfAbsent(id, k -> new ReentrantLock(true));
         lock.lock();
         try {
             UserPoint userPoint = getPoint(userPointDto);
@@ -89,7 +89,7 @@ public class PointServiceImpl implements PointService {
 
         validatePositiveAmount(amount);
 
-        ReentrantLock lock = lockMap.computeIfAbsent(id, k -> new ReentrantLock());
+        ReentrantLock lock = lockMap.computeIfAbsent(id, k -> new ReentrantLock(true));
         lock.lock();
         try {
             UserPoint userPoint = getPoint(userPointDto);
