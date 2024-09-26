@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -16,32 +14,32 @@ public class UserPointRepositoryImpl implements UserPointRepository {
     private final UserPointTable userPointTable;
 
     @Override
-    public Optional<UserPoint> selectById(long id) {
+    public UserPoint selectById(long id) {
         log.info("Fetching UserPoint for userId: {}", id);
 
-        Optional<UserPoint> userPoint = Optional.ofNullable(userPointTable.selectById(id));
+        UserPoint userPoint = userPointTable.selectById(id);
+        log.info("UserPoint found with userId: {}, point: {}", userPoint.getId(), userPoint.getPoint());
 
-        userPoint.ifPresent(point -> log.info("UserPoint found with userId: {}, point: {}", point.id(), point.point()));
         return userPoint;
     }
 
     @Override
-    public Optional<UserPoint> create(long id, long point) {
+    public UserPoint create(long id, long point) {
         log.info("Creating UserPoint for userId: {}, initial point: {}", id, point);
 
-        Optional<UserPoint> result = Optional.ofNullable(userPointTable.insertOrUpdate(id, point));
+        UserPoint result = userPointTable.insertOrUpdate(id, point);
+        log.info("UserPoint created successfully with userId: {}, point: {}", result.getId(), result.getPoint());
 
-        result.ifPresent(userPoint -> log.info("UserPoint created successfully with userId: {}, point: {}", userPoint.id(), userPoint.point()));
         return result;
     }
 
     @Override
-    public Optional<UserPoint> update(long id, long point) {
+    public UserPoint update(long id, long point) {
         log.info("Updating UserPoint for userId: {}, new point: {}", id, point);
 
-        Optional<UserPoint> result = Optional.ofNullable(userPointTable.insertOrUpdate(id, point));
+        UserPoint result = userPointTable.insertOrUpdate(id, point);
+        log.info("UserPoint updated successfully with userId: {}, point: {}", result.getId(), result.getPoint());
 
-        result.ifPresent(userPoint -> log.info("UserPoint updated successfully with userId: {}, point: {}", userPoint.id(), userPoint.point()));
         return result;
     }
 }
