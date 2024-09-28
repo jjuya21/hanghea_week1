@@ -116,7 +116,7 @@ class PointServiceTest {
                 .hasMessage("포인트가 부족하여 사용이 불가능합니다.");
     }
 
-    @DisplayName("한 id로 동시의 10개 포인트 충전요청처리 시 큐에 담아 차례대로 처리해야한다.")
+    @DisplayName("한 id로 동시의 10개 포인트 충전요청처리 시 차례대로 처리해야한다.")
     @Test
     void testConcurrentChargePoints() throws InterruptedException {
         // given 기본 유저 초기화
@@ -137,7 +137,7 @@ class PointServiceTest {
         assertThat(userPoint.getPoint()).isEqualTo(INITIAL_POINT + (CHARGE_AMOUNT * 10));
     }
 
-    @DisplayName("한 id로 동시의 10개 포인트 사용요청처리 시 큐에 담아 차례대로 처리해야한다.")
+    @DisplayName("한 id로 동시의 10개 포인트 사용요청처리 시 차례대로 처리해야한다.")
     @Test
     void testConcurrentUsePoints() throws InterruptedException {
         // given 기본 유저 초기화
